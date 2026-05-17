@@ -23,20 +23,33 @@ endif()
 message(STATUS "MS-MPI include : ${MSMPI_INC}")
 message(STATUS "MS-MPI lib     : ${MSMPI_LIB64}")
 
-# ── Ціль: MPI-версія ─────────────────────────────────────────
-add_executable(primes_mpi
-        lab_mpi/primes_mpi.cpp
-)
+# =================================================================
+# ── Ціль: MPI-версії ─────────────────────────────────────────────
+# =================================================================
 
+# 1. Поточна лабораторна робота (MPI)
+add_executable(primes_mpi lab_mpi/primes_mpi.cpp)
 target_include_directories(primes_mpi PRIVATE "${MSMPI_INC}")
 target_link_directories(primes_mpi PRIVATE "${MSMPI_LIB64}")
 target_link_libraries(primes_mpi PRIVATE msmpi)
 
-# ── Ціль: OpenMP-версія ──────────────────────────────────────
-add_executable(primes_omp
-        lab_openmp/primes_omp.cpp
-)
+# 2. Архівна версія (MPI)
+add_executable(primes_mpi_arch arch/primes_mpi.cpp)
+target_include_directories(primes_mpi_arch PRIVATE "${MSMPI_INC}")
+target_link_directories(primes_mpi_arch PRIVATE "${MSMPI_LIB64}")
+target_link_libraries(primes_mpi_arch PRIVATE msmpi)
 
-# Явно додаємо -fopenmp для MinGW
+
+# =================================================================
+# ── Ціль: OpenMP-версії ──────────────────────────────────────────
+# =================================================================
+
+# 3. Поточна лабораторна робота (OpenMP)
+add_executable(primes_omp lab_openmp/primes_omp.cpp)
 target_compile_options(primes_omp PRIVATE -fopenmp)
 target_link_options(primes_omp PRIVATE -fopenmp)
+
+# 4. Архівна версія (OpenMP)
+add_executable(primes_omp_arch arch/primes_omp.cpp)
+target_compile_options(primes_omp_arch PRIVATE -fopenmp)
+target_link_options(primes_omp_arch PRIVATE -fopenmp)
