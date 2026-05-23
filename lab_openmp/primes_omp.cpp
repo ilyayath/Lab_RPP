@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <cstdio>
 
-bool is_prime(long long n) {
+bool IsPrime(long long n) {
     if (n < 2) return false;
     if (n < 4) return true;
     if (n % 2 == 0) return false;
@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
 
 #pragma omp parallel for schedule(dynamic, 1000) reduction(+:total_count)
     for (long long n = A; n <= B; n++) {
-        if (is_prime(n)) {
+        if (IsPrime(n)) {
             total_count++;
         }
     }
