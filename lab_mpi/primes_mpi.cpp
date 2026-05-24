@@ -24,7 +24,7 @@ int IsPrime(long long n) {
 void ProcessInitialization(long long &A, long long &B, int argc, char* argv[]) {
     if (ProcRank == 0) {
         if (argc < 3) {
-            printf("Usage: mpiexec -n <num_proc> ParallelPrimes_MPI.exe <A> <B>\n");
+            printf("Usage: mpiexec -n <num_proc> primes_mpi.exe <A> <B>\n");
             A = 1;
             B = 1000000;
             printf("Using default range: [%lld, %lld]\n", A, B);
